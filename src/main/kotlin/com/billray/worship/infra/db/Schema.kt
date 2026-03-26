@@ -11,10 +11,20 @@ object ServiceSetsTable : Table("service_sets") {
     override val primaryKey = PrimaryKey(id)
 }
 
+object SongsTable : Table("songs") {
+    val id = long("id").autoIncrement()
+    val title = varchar("title", 255)
+    val lyrics = text("lyrics")
+    val author = varchar("author", 255).default("")
+    val tags = text("tags").default("")
+
+    override val primaryKey = PrimaryKey(id)
+}
+
 object Schema {
     fun create() {
         transaction {
-            SchemaUtils.create(ServiceSetsTable)
+            SchemaUtils.create(ServiceSetsTable, SongsTable)
         }
     }
 }
